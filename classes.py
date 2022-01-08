@@ -27,20 +27,19 @@ class BossBullet(pygame.sprite.Sprite):
         self.image = BossBullet.image
         self.rect = self.image.get_rect()
         self.rect.x = Boss().rect.x
-        self.rect.y = Boss().rect.y
+        self.rect.y = 190
 
     def update(self):
         self.rect.x -= 10
-        if self.rect.x == Bunker().rect.x:
+        if self.rect.x <= Bunker().rect.x:
             self.rect.x = Boss().rect.x
+            print("МИнус жизнь")
 
-        elif self.rect.x < Bunker().rect.x:
-            self.rect.x = Boss().rect.x
 
 
 class Bunker(pygame.sprite.Sprite):
     image1 = pygame.image.load("data/crateMetal.png")
-    image = pygame.transform.scale(image1, (28, 28))
+    image = pygame.transform.scale(image1, (50, 50)) # = bunker size
 
     def __init__(self, *group):
         super().__init__(*group)
@@ -48,6 +47,8 @@ class Bunker(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 50
         self.rect.y = 175
+
+
 
 
 class Hero(pygame.sprite.Sprite):
@@ -64,7 +65,7 @@ class Hero(pygame.sprite.Sprite):
 
     def update(self):
         keys = pygame.key.get_pressed()
-        print(self.key_is_up)
+        #print(self.key_is_up)
         if keys[pygame.K_a]:
             self.rect.x -= 5
         if keys[pygame.K_d]:
@@ -79,5 +80,3 @@ class Hero(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT] and self.key_is_up:
             self.image = pygame.transform.rotate(self.image, -90)
             self.key_is_up = False
-
-
