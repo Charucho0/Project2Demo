@@ -2,7 +2,6 @@ import pygame
 
 pygame.init()
 
-
 class Boss(pygame.sprite.Sprite):
     image1 = pygame.image.load("data/tank_huge.png")
     image = pygame.transform.scale(image1, (62, 76))
@@ -43,11 +42,18 @@ class Bunker(pygame.sprite.Sprite):
 
     def __init__(self, *group):
         super().__init__(*group)
+        pygame.font.init() # you have to call this at the start,
+                   # if you want to use this module.
+        self.font = pygame.font.SysFont('Comic Sans MS', 30)
+
         self.image = Bunker.image
         self.rect = self.image.get_rect()
         self.rect.x = 50
         self.rect.y = 175
 
+    def update(self):
+        lives_text = self.font.render(f'Жизни которые хрен отображишь', False, (0, 0, 0))
+        return lives_text
 
 
 
