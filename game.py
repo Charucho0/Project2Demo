@@ -30,11 +30,13 @@ if __name__ == '__main__':
                 running = False
             if event.type == pygame.KEYUP:
                 player.key_is_up = True
-                print('yes i am here')
+                #print('yes i am here')
         screen.fill(pygame.Color('white'))
 
         all_sprites.draw(screen)
         all_sprites.update()
+
+        screen.blit(Bunker().update(), (0,0))
 
         pygame.display.flip()
 
